@@ -1,0 +1,33 @@
+/* formatting for navigation bar, that appears on every page */
+
+/* general bar formatting */
+.foot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #00319C;
+    margin-bottom: 0;
+    padding: 0.5em;
+  /*   border-style: solid;
+    border-color: black; */
+  }
+  
+  
+  .foot-text { 
+    color: white;
+    text-align: right;
+    margin-right: 2em;
+    padding: 2em;
+  /*     border: solid black; */
+  }
+  .foot-text p {
+    font-family: "EB Garamond", serif;
+  }
+  
+  .pa_logo {
+    filter: invert(100%);
+    width: 200px;
+    margin: 0;
+    margin-left: 30px;  
+  /*   border: 3px solid black;  */
+  }  
