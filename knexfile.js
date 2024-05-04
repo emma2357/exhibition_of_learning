@@ -1,4 +1,5 @@
 // Update with your config settings.
+const path = require('path');
 
 module.exports = {
   development: {
@@ -29,10 +30,10 @@ module.exports = {
       ssl: {rejectUnauthorized: false},
     },
     migrations: {
-      directory: './db/migrations',
+      directory: __dirname + '/db/migrations',
     },
     seeds: {
-      directory: './db/seeds',
+      directory: __dirname + '/db/seeds',
     },
   },
 };
