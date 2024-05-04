@@ -29,10 +29,10 @@ module.exports = {
       ssl: {rejectUnauthorized: false},
     },
     migrations: {
-      directory: __dirname + '/db/migrations',
+      directory: './db/migrations',
     },
     seeds: {
-      directory: __dirname + '/db/seeds',
+      directory: './db/seeds',
     },
   },
 };
