@@ -31,7 +31,6 @@ const getExhibitionsHomePageJSON = async() => {
                 db.raw('ARRAY_AGG(skills.skill_name) skills'),
                 db.raw('ARRAY_AGG(skills.throughline) throughlines')
                ]))
-            //
             .from("exhibitions")
             
             .where("display_on_home_page", true)
@@ -48,7 +47,7 @@ const getExhibitionsHomePageJSON = async() => {
             console.log(JSON.stringify(exhibitions));
         return exhibitions;
     } catch (error) {
-        console.log("error")
+        console.log(error)
         return [];
     }
 }
