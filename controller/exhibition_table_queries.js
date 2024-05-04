@@ -24,12 +24,10 @@ const getExhibitionsHomePage = async(req, res) => {
 
 const getExhibitionsHomePageJSON = async() => {
     try {
+        console.log("starting")
         columns = ['exhibitions.exhibition_id', 'exhibitions.description', 'exhibitions.video_html_code', 'users.first_name', 'users.last_name', 'classes.academic_year', 'classes.term', 'courses.course_number', 'courses.course_name']
-        const exhibitions = await //knex.table("exhibitions")
-            db
-            //.select("*")
+        const exhibitions = await db
             .select(columns.concat([
-                //'exhibitionSkillPairs.skill_id_ref',
                 db.raw('ARRAY_AGG(skills.skill_name) skills'),
                 db.raw('ARRAY_AGG(skills.throughline) throughlines')
                ]))
@@ -46,8 +44,11 @@ const getExhibitionsHomePageJSON = async() => {
             
             .groupBy(columns)
             ;
+            console.log("returning");
+            console.log(JSON.stringify(exhibitions));
         return exhibitions;
     } catch (error) {
+        console.log("error")
         return [];
     }
 }
