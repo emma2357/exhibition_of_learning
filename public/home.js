@@ -69,21 +69,23 @@ function search() {
   });
 }
 
-//Show tag panel when search bar is clicked
-document.getElementById('search_bar').addEventListener('click', function() {
-  const tagPanel = document.getElementById('tag_panel_of_search');
-  tagPanel.style.display = 'block';
-});
-
-
-// Hide tag panel when clicking outside
-document.body.addEventListener('click', function(event) {
-  const tagPanel = document.getElementById('tag_panel_of_search');
-  const searchBar = document.getElementById('search_bar');
-  // const tagButtons = document.querySelectorAll('.tag_button');
-
+// https://stackoverflow.com/questions/26107125/cannot-read-property-addeventlistener-of-null
+document.addEventListener('DOMContentLoaded', function() {
+  //Show tag panel when search bar is clicked
+  document.getElementById('search_bar').addEventListener('click', function() {
+    const tagPanel = document.getElementById('tag_panel_of_search');
+    if (tagPanel) {
+      tagPanel.style.display = 'block';
+    }
+  });
   
-  if (!tagPanel.contains(event.target) && event.target !== searchBar) {
-    tagPanel.style.display = 'none';
-  }
+   // Hide tag panel when clicking outside
+  document.body.addEventListener('click', function(event) {
+    const tagPanel = document.getElementById('tag_panel_of_search');
+    const searchBar = document.getElementById('search_bar');
+
+    if (tagPanel && searchBar && !tagPanel.contains(event.target) && event.target !== searchBar) {
+      tagPanel.style.display = 'none';
+    }
+  });
 });
