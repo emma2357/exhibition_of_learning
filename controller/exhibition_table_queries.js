@@ -1,3 +1,4 @@
+// functions associated with getting data from the exhibition table
 const { query } = require("express");
 const db = require("../db/db")
 
@@ -7,10 +8,11 @@ const getAllExhibitions = async(req, res) => {
         res.send(exhibitions);
     } catch (error) {
         console.error(error);
-        res.status(500).json({error: error.message}) // Something is very majorly wrong
+        res.status(500).json({error: error.message}) 
     }
 }
 
+// get the exhibitions that can be displayed on the home page
 const getExhibitionsHomePage = async(req, res) => {
     try {
         const exhibitions = await db.select("*").from("exhibitions")
@@ -18,10 +20,11 @@ const getExhibitionsHomePage = async(req, res) => {
         res.send(exhibitions);
     } catch (error) {
         console.error(error);
-        res.status(500).json({error: error.message}) // Something is very majorly wrong
+        res.status(500).json({error: error.message})
     }
 }
 
+// get a json string of the exhibitions that can be displayed on the home page
 const getExhibitionsHomePageJSON = async() => {
     try {
         console.log("starting")
@@ -52,6 +55,7 @@ const getExhibitionsHomePageJSON = async() => {
     }
 }
 
+// IN PROGRESS: get exhibitions from a search results api call ------------------
 const searchExhibitions = async(req, res) => {
     try {
         const student_id = parseInt(req.params.student_id);
@@ -117,9 +121,10 @@ const searchExhibitions = async(req, res) => {
         res.status(500).json({error: error.message}) // Something is very majorly wrong
     }
 }
+// ------------------------
 
+// all functions must be exported
 module.exports = {
-    // ALL FUNCTIONS USED GO HERE
     getAllExhibitions,
     getExhibitionsHomePage,
     getExhibitionsHomePageJSON,

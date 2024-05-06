@@ -1,4 +1,4 @@
-// creates initial database schema
+// create initial database schema
 
 exports.up = function(knex) {
     return knex.schema

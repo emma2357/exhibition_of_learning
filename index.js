@@ -1,10 +1,6 @@
 const express = require('express');
 const exhibitionController = require("./controller/exhibition_table_queries");
 
-//const multer = require('multer');
-//const xlsx = require('xlsx');
-//const upload = multer({ dest: 'uploads/' });
-
 var app = express();
 
 const path = require("path")
@@ -14,11 +10,13 @@ const ejs = require("ejs");
 app.set('view engine', 'ejs'); 
 app.set('views', path.join(__dirname, 'views')) 
 
+// add paths from the router file
 const router = require("./routes/route_index.js");
 app.use(router);
 
 // respond to requests for the main page
 app.get('/', async function(req, res){
+  // get JSON data, send that data to home page
    exhibitions = await exhibitionController.getExhibitionsHomePageJSON();
    console.log(exhibitions)
    res.render("home", 
@@ -46,6 +44,12 @@ app.get("/search", function (req, res) {
    res.render("admin-home");
  });
 
+// IN PROGRESS: Uploading, parsing, and saving excel files -----------
+
+//const multer = require('multer');
+//const xlsx = require('xlsx');
+//const upload = multer({ dest: 'uploads/' });
+
 // // uploading excel files template code
 // app.post('/upload', upload.single('file'), async (req, res) => {
 //     const workbook = xlsx.readFile(req.file.path);
@@ -72,6 +76,7 @@ app.get("/search", function (req, res) {
 //                 //     item.Complete,
 //                 //     item.Value,
 //                 // ]
+//                 // -------------
 //             );
 //         }
 //     } catch (err) {
@@ -79,5 +84,6 @@ app.get("/search", function (req, res) {
 //         res.status(500).json({ error: 'Error inserting data into the database.' });
 //     } 
 // });
+// ------------------------
 
-app.listen(process.env.PORT || 3000, () => console.log('server listening on port 3000'));
+app.listen(process.env.PORT || 3000, () => console.log('server listening'));

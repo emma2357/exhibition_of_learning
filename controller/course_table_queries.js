@@ -1,3 +1,4 @@
+// functions associated with getting data from the course table
 const db = require("../db/db")
 
 const getAllCourses = async(req, res) => {
@@ -6,10 +7,11 @@ const getAllCourses = async(req, res) => {
         res.send(courses);
     } catch (error) {
         console.error(error);
-        res.status(500).json({error: error.message}) // Something is very majorly wrong
+        res.status(500).json({error: error.message}) 
     }
 }
 
+// get a list of unique course names
 const getUniqueCourseNames = async(req, res) => {
     try {
         const courses = await db.select("course_name").from("courses")
@@ -18,11 +20,12 @@ const getUniqueCourseNames = async(req, res) => {
         res.send(courses);
     } catch (error) {
         console.error(error);
-        res.status(500).json({error: error.message}) // Something is very majorly wrong
+        res.status(500).json({error: error.message})
     }
 }
 
-// FIX for accounting for spaces
+// IN PROGRESS: get course id given the course name from an api call -------
+// FIX: account for spaces in course name when passed into api call
 const getCourseIdFromCourseName = async(req, res) => {
     const course_name = parseInt(req.params.course_name);
 
@@ -33,10 +36,12 @@ const getCourseIdFromCourseName = async(req, res) => {
         res.send(courses);
     } catch (error) {
         console.error(error);
-        res.status(500).json({error: error.message}) // Something is very majorly wrong
+        res.status(500).json({error: error.message})
     }
 }
+// ---------
 
+// get unique academic years
 const getAcademicYears = async(req, res) => {
     try {
         const years = await db.select("academic_year").from("courses")
@@ -45,12 +50,12 @@ const getAcademicYears = async(req, res) => {
         res.send(years);
     } catch (error) {
         console.error(error);
-        res.status(500).json({error: error.message}) // Something is very majorly wrong
+        res.status(500).json({error: error.message}) 
     }
 }
 
+// all functions must be exported
 module.exports = {
-    // ALL FUNCTIONS USED GO HERE
     getAllCourses,
     getUniqueCourseNames,
     getCourseIdFromCourseName,
