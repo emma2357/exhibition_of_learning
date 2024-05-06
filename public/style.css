@@ -1,3 +1,5 @@
+/* General styling across all pages.  */
+
 /* Importing EB Garamond */
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
 /* Importing Open Sans */
@@ -24,8 +26,6 @@ h1 {
   text-align: center;
   max-width: 55em;
   font-size: 60px;
-/*   margin: 0 auto;
-  border: 3px solid black; */
 }
 
 a {
@@ -37,4 +37,8 @@ button {
   background: none;
   border: none;
   padding: 0;
+}
+
+button:hover {
+  transform: translatey(-2px);
 }

@@ -1,9 +1,9 @@
 <html>
 <head>
-  <title>EoL Home</title>
+  <title>Web Dev Practice</title>
   <link rel="stylesheet" href="style.css"/>
-  <link rel="stylesheet" href="home.css"/>
   <script src="home.js"></script>
+  <link rel="stylesheet" href="home.css"/>
   <style>
     .home {
       font-weight: bold;
@@ -24,48 +24,29 @@
       </p>
     </div>
 
+  <!-- includes the search bar and tagging system-->
     <div class="search_bar_section">
       <div class="search_bar_box">
         <div class="search_bar">
           <img id="search_image" src="https://cdn-icons-png.flaticon.com/512/61/61088.png">
-<!--           <div class="selection_button" onclick="">
-            
-            <select>
-              <option>All Tags</option>
-              <option>Skill</option>
-              <option>Throughline</option>
-              <option>Name</option>
-              <option>Teacher</option>
-              <option>Class</option>
-            </select>
-            <span class="custon-arrow"></span>
-          </div> -->
           <input type="text" id="search_bar" placeholder="Hashtag Search ... " onkeyup="search()">
           <div id="tag_panel_of_search">
-            <button class="tag_button" onclick="insertTag('SampleTag1', 'computerScienceClasses')">SampleTag1</button>
-            <button class="tag_button" onclick="insertTag('SampleTag1', 'computerScienceClasses')">SampleTag2</button>
-            <button class="tag_button" onclick="insertTag('SampleTag1', 'computerScienceClasses')">SampleTag1</button>
-            <button class="tag_button" onclick="insertTag('SampleTag1', 'computerScienceClasses')">SampleTag2</button>
-            <button class="tag_button" onclick="insertTag('SampleTag1', 'computerScienceClasses''SampleTag1', 'computerScienceClasses')">SampleTag1</button>
-            <button class="tag_button" onclick="insertTag('SampleTag1', 'computerScienceClasses')">SampleTag2</button>
-            <button class="tag_button" onclick="insertTag('SampleTag1', 'computerScienceClasses')">SampleTag1</button>
-            <button class="tag_button" onclick="insertTag('SampleTag1', 'computerScienceClasses')">SampleTag2</button>
-            <button class="tag_button" onclick="insertTag('SampleTag1', 'computerScienceClasses')">SampleTag1</button>
-            <button class="tag_button" onclick="insertTag('SampleTag1', 'computerScienceClasses')">SampleTag2</button>
-            <button class="tag_button" onclick="insertTag('SampleTag1', 'computerScienceClasses')">SampleTag2</button>
-            <button class="tag_button" onclick="insertTag('SampleTag1')">SampleTag1</button>
-            <button class="tag_button" onclick="insertTag('SampleTag1', 'computerScienceClasses')">SampleTag2</button>
-            <button class="tag_button" onclick="insertTag('SampleTag1', 'computerScienceClasses')">SampleTag1</button>
-            <button class="tag_button" onclick="insertTag('SampleTag1', 'computerScienceClasses')">SampleTag2</button>
-            <button class="tag_button" onclick="insertTag('SampleTag1', 'computerScienceClasses')">SampleTag1</button>
-            <button class="tag_button" onclick="insertTag('SampleTag1', 'computerScienceClasses')">SampleTag2</button>
-            <button class="tag_button" onclick="insertTag('SampleTag1', 'computerScienceClasses')">SampleTag2</button>
-            <button class="tag_button" onclick="insertTag('SampleTag1', 'computerScienceClasses')">SampleTag1</button>
-            <button class="tag_button" onclick="insertTag('SampleTag1', 'computerScienceClasses')">SampleTag2</button>
-            <button class="tag_button" onclick="insertTag('SampleTag1', 'computerScienceClasses')">SampleTag1</button>
-            <button class="tag_button" onclick="insertTag('SampleTag1', 'computerScienceClasses')">SampleTag2</button>
-            <button class="tag_button" onclick="insertTag('SampleTag1', 'computerScienceClasses')">SampleTag1</button>
-            <button class="tag_button" onclick="insertTag('SampleTag1', 'computerScienceClasses')">SampleTag2</button>
+            <!-- when the tag panel is opened, the tags (as buttons) are all displayed-->
+            <button class="tag_button" onclick="insertTag('CSC403', 'computerScienceClasses')">CSC403</button>
+            <button class="tag_button" onclick="insertTag('CSC573', 'computerScienceClasses')">CSC461</button>
+            <button class="tag_button" onclick="insertTag('CSC580', 'computerScienceClasses')">CSC471</button>
+            <button class="tag_button" onclick="insertTag('CSC600', 'computerScienceClasses')">CSC552</button>
+            <button class="tag_button" onclick="insertTag('CSC561', 'computerScienceClasses')">CSC561</button>
+            <button class="tag_button" onclick="insertTag('CSC562', 'computerScienceClasses')">CSC562</button>
+            <button class="tag_button" onclick="insertTag('CSC573', 'computerScienceClasses')">CSC573</button>
+            <button class="tag_button" onclick="insertTag('CSC600', 'computerScienceClasses')">CSC600</button>
+            <button class="tag_button" onclick="insertTag('Introductory', 'courseLevel')">Introductory</button>
+            <button class="tag_button" onclick="insertTag('Intermediate', 'courseLevel')">Intermediate</button>
+            <button class="tag_button" onclick="insertTag('Advanced', 'courseLevel')">Advanced</button>
+            <button class="tag_button" onclick="insertTag('Independent Research', 'courseLevel')">Independent Research</button>
+            <button class="tag_button" onclick="insertTag('Collaboration', 'skills')">Collaboration</button>
+            <button class="tag_button" onclick="insertTag('Writing Code', 'skills')">Writing Code</button>
+            <button class="tag_button" onclick="insertTag('Questioning Impact', 'skills')">Questioning Impact</button>
           </div>
           <img id="microphone_image" src="https://www.iconpacks.net/icons/1/free-microphone-icon-342-thumb.png">
         </div>
@@ -79,6 +60,9 @@
   </div>
 </div>
     
+    
+        
+<!--   video section -->
 <div class="highlights">
   <h1 class = "highlights_text">Recent Exhibition of Learning</h1>
     <div class="video_highlights">
