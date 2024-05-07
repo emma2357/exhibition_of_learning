@@ -46,6 +46,8 @@ app.get("/search", function (req, res) {
 
 // IN PROGRESS: Uploading, parsing, and saving excel files -----------
 
+// a lot of this will go into middleware!
+
 //const multer = require('multer');
 //const xlsx = require('xlsx');
 //const upload = multer({ dest: 'uploads/' });
