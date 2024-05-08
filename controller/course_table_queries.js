@@ -11,10 +11,10 @@ const getAllCourses = async(req, res) => {
     }
 }
 
-// get a list of unique course names
+// get a list of unique course names/numbers
 const getUniqueCourseNames = async(req, res) => {
     try {
-        const courses = await db.select("course_name").from("courses")
+        const courses = await db.select(["course_name", "course_number"]).from("courses")
             .distinct();
 
         res.send(courses);
@@ -41,23 +41,9 @@ const getCourseIdFromCourseName = async(req, res) => {
 }
 // ---------
 
-// get unique academic years
-const getAcademicYears = async(req, res) => {
-    try {
-        const years = await db.select("academic_year").from("courses")
-            .distinct();
-        
-        res.send(years);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({error: error.message}) 
-    }
-}
-
 // all functions must be exported
 module.exports = {
     getAllCourses,
     getUniqueCourseNames,
-    getCourseIdFromCourseName,
-    getAcademicYears
+    getCourseIdFromCourseName
 };
