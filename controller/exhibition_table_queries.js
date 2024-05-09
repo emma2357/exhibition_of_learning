@@ -88,37 +88,37 @@ const getExhibitionsSearchResults = async(search_parameters) => {
             .modify(function(queryBuilder) {
                 queryBuilder.leftJoin("exhibitionSkillPairs", "exhibitions.exhibition_id", "exhibitionSkillPairs.exhibition_id_ref")
                 .leftJoin("skills", "exhibitionSkillPairs.skill_id_ref", "skills.skill_id")
-                if(skill_id != []){
+                if(skill_id.length != 0){
                     queryBuilder
                     .whereIn("exhibitionSkillPairs.skill_id_ref", skill_id)
                     
                 }
                 queryBuilder.distinctOn('exhibition_id')
 
-                if(user_id != []){
+                if(user_id.length != 0){
                     queryBuilder
                     .whereIn("users.user_id", user_id)
                 }
 
-                if(course_id != []){
+                if(course_id.length != 0){
                     queryBuilder
                     .whereIn("courses.course_id", course_id)
                 }
 
-                if(admin_id != []){
+                if(admin_id.length != 0){
                     queryBuilder
                     .whereIn("admins.admin_id", admin_id)
                 }
 
-                if(academic_year != []){
+                if(academic_year.length != 0){
                     queryBuilder.whereIn("classes.academic_year", academic_year)
                 }
 
-                if(term != []){
+                if(term.length != 0){
                     queryBuilder.whereIn("classes.term", term)
                 }
 
-                if(course_level != []){
+                if(course_level.length != 0){
                     console.log("we're in!")
                     console.log(course_level)
                     queryBuilder.whereIn("courses.course_level", course_level)
