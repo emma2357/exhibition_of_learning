@@ -64,32 +64,49 @@ const getExhibitionsSearchResults = async(search_parameters) => {
     var academic_year = search_parameters.academic_year;
     var term = search_parameters.term;
     var course_level = search_parameters.course_level;
-    console.log(user_id)
+    console.log("user id:", user_id)
 
     try {
+        columns = ['exhibitions.exhibition_id', 'exhibitions.description', 'exhibitions.video_html_code', 'users.first_name', 'users.last_name', 'classes.academic_year', 'classes.term', 'courses.course_number', 'courses.course_name']
+
         const exhibitions = 
-        await db.select("*")
+        await db
+        //.select("*")
+        .select(columns
+            .concat([
+            db.raw('ARRAY_AGG(skills.skill_name) skills'),
+            db.raw('ARRAY_AGG(skills.throughline) throughlines')
+           ])
+           )
+
+
         .from("exhibitions")
+        .innerJoin("users", "exhibitions.user_id_ref", "=", "users.user_id")
+        .innerJoin("classes", "exhibitions.class_id_ref", "=", "classes.class_id")
+        .innerJoin("courses", "classes.course_id_ref", "=", "courses.course_id")
+        .innerJoin("admins", "classes.admin_id_ref", "=", "admins.admin_id")
             .modify(function(queryBuilder) {
+                queryBuilder.leftJoin("exhibitionSkillPairs", "exhibitions.exhibition_id", "exhibitionSkillPairs.exhibition_id_ref")
+                .leftJoin("skills", "exhibitionSkillPairs.skill_id_ref", "skills.skill_id")
                 if(skill_id != []){
-                    queryBuilder.leftJoin("exhibitionSkillPairs", "exhibitions.exhibition_id", "exhibitionSkillPairs.exhibition_id_ref")
+                    queryBuilder
                     .whereIn("exhibitionSkillPairs.skill_id_ref", skill_id)
-                    .distinctOn('exhibition_id')
+                    
                 }
+                queryBuilder.distinctOn('exhibition_id')
 
                 if(user_id != []){
-                    queryBuilder.innerJoin("users", "exhibitions.user_id_ref", "=", "users.user_id")
+                    queryBuilder
                     .whereIn("users.user_id", user_id)
                 }
 
                 if(course_id != []){
-                    queryBuilder.innerJoin("classes", "exhibitions.class_id_ref", "=", "classes.class_id")
-                        .innerJoin("courses", "classes.course_id_ref", "=", "courses.course_id")
+                    queryBuilder
                     .whereIn("courses.course_id", course_id)
                 }
 
                 if(admin_id != []){
-                    queryBuilder.innerJoin("admins", "classes.admin_id_ref", "=", "admins.admin_id")
+                    queryBuilder
                     .whereIn("admins.admin_id", admin_id)
                 }
 
@@ -102,9 +119,13 @@ const getExhibitionsSearchResults = async(search_parameters) => {
                 }
 
                 if(course_level != []){
+                    console.log("we're in!")
+                    console.log(course_level)
                     queryBuilder.whereIn("courses.course_level", course_level)
                 }
            })
+           .groupBy(columns)
+
         return exhibitions;
     } catch (error) {
         console.log(error)

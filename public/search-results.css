@@ -78,3 +78,32 @@ button{
   margin: .5rem 0;
   font-family: 'EB Garamond', serif;
 }
+
+.highlights_text{
+  text-align: center;
+  font-size: 40px;
+}
+
+.video_highlights{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 1rem;
+  grid-row-gap: 0px;
+  margin: 2rem;
+}
+
+.video{
+  margin: 1rem;
+  width: 300px;
+  max-width: 320px;
+}
+
+.video_thumbnail{
+  margin: 1rem;
+}
+
+.video_text{
+  align-self: start;
+  margin-bottom: 3%;
+}

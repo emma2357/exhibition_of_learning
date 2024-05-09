@@ -20,16 +20,49 @@
     <p class="tag-description__info">This is a sample tag description.. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
   </div>
   
-  <div class="eols">
-    <h1 class="eols__title">Exhibitions of Learning</h1>
-    <div class="exhibition">
-      <div class="exhibition__video"></div>
-      <div class="exhibition__tags">
-        <p class="exhibition__tag">#Sample Tag 1</p>
-        <p class="exhibition__tag">#Sample Tag 2</p>
-      </div>
-      <p class="exhibition__info">Student Name</p>
-      <p class="exhibition__info">Upload Date</p>
+  <!--   video section -->
+  <div class="highlights">
+    <h1 class = "highlights_text">Recent Exhibition of Learning</h1>
+      <div class="video_highlights">
+        <% if (exhibitions.length > 0) {
+          exhibitions.forEach(function(exhibition) {
+            %>
+            <div class="video">
+            <div class="video_thumbnail"><%-exhibition.video_html_code%>
+            </div>
+            <div class="video_tags"><%=exhibition.course_number%>: <%=exhibition.course_name%>
+              <%
+                exhibition.skills.forEach(function(skill) {
+                  %>
+                  | <%=skill%>
+                  <%
+                })
+              %>
+            </div>
+            <div class="video_text">
+              <div class="student_name"><%= exhibition.first_name %> <%= exhibition.last_name %></div>
+              <div class="upload_date">
+                <% if (exhibition.term == 1) {
+                  %>
+                  Fall Term, 
+                  <%
+                } else if (exhibition.term == 2) {
+                  %>
+                  Winter Term, 
+                  <%
+                } else if (exhibition.term == 3) {
+                  %>
+                  Spring Term, 
+                  <%
+                }%>
+                <%= exhibition.academic_year%> 
+              </div>
+            </div>
+          </div>
+          <%
+        })
+      }
+      %>
     </div>
   </div>
 </body>

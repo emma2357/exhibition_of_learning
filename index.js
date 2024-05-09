@@ -45,23 +45,28 @@ app.use(bodyParser.urlencoded({ extended: false })); //Handles normal post reque
 
 // EXAMPLE URL FOR TESTING: /search?students=[101,102]&teachers=[103,104]&skills=[1,2]&courses=[10001,10002]&year=[2022,2023]&term=[1,2,3]&level=["Advanced"]
 app.get('/search', async (req, res)=>{
+  var course_level = "[-1]"
+  if (typeof req.query.level !== 'undefined') {
+    course_level = req.query.level.replaceAll("%22", '"')
+  }
+
   var search_parameters = {
-    user_id : JSON.parse(req.query.students || "[]"),
-    admin_id : JSON.parse(req.query.teachers || "[]"),
-    skill_id : JSON.parse(req.query.skills || "[]"),
-    course_id : JSON.parse(req.query.courses || "[]"),
-    academic_year : JSON.parse(req.query.year || "[]"),
-    term : JSON.parse(req.query.term || "[]"),
-    course_level : JSON.parse(req.query.level.replaceAll("%22", '"') || "[]"), // MAY HAVE TO REPLACE THIS IN THE FUTURE
+    user_id : JSON.parse(req.query.students || "[-1]"),
+    admin_id : JSON.parse(req.query.teachers || "[-1]"),
+    skill_id : JSON.parse(req.query.skills || "[-1]"),
+    course_id : JSON.parse(req.query.courses || "[-1]"),
+    academic_year : JSON.parse(req.query.year || "[-1]"),
+    term : JSON.parse(req.query.term || "[-1]"),
+    course_level : JSON.parse(course_level), // MAY HAVE TO REPLACE THIS IN THE FUTURE
   };
 
   exhibitions = await exhibitionController.getExhibitionsSearchResults(search_parameters);
 
   //res.send(search_parameters)
-  res.send(exhibitions)
-  // res.render("search", 
-  //     {exhibitions
-  //     }) // also send: is this a student is sending this to colleges page or not? --> in which case send bio
+  //res.send(exhibitions)
+  res.render("search-results", 
+       {exhibitions
+       }) // also send: is this a student is sending this to colleges page or not? --> in which case send bio
   //     // if not user page, send all other bios (for skills, courses, etc)
   //     // THIS IS ASSUMING NO PRESENTABLE MODE, SEARCH RESULTS JUST IS PRESENTABLE MODE
 });
