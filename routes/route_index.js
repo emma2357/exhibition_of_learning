@@ -10,17 +10,17 @@ const router = express.Router();
 
 module.exports = router;
 
-router.get("/api/skills", skillController.getAllSkills);
-router.get("/api/course_names", courseController.getUniqueCourseNames);
-router.get("/api/course_id/:course_name", courseController.getCourseIdFromCourseName);
+// router.get("/api/skills", skillController.getAllSkills);
+// router.get("/api/course_names", courseController.getUniqueCourseNames);
+// router.get("/api/course_id/:course_name", courseController.getCourseIdFromCourseName);
 
-router.get("/api/exhibitions", exhibitionController.getAllExhibitions);
-router.get("api/exhibitions/homepage", exhibitionController.getExhibitionsHomePage);
+// router.get("/api/exhibitions", exhibitionController.getAllExhibitions);
+// router.get("api/exhibitions/homepage", exhibitionController.getExhibitionsHomePage);
 
-router.get("/api/users", userController.getAllUsers);
-router.get("/api/academic_years", courseController.getAcademicYears);
+// router.get("/api/users", userController.getAllUsers);
+// router.get("/api/academic_years", courseController.getAcademicYears);
 
-router.get("/api/search/:student_id/:course_id/:teacher_id/:skill_ids/:academic_year/:term", exhibitionController.searchExhibitions);
+// router.get("/api/search/:student_id/:course_id/:teacher_id/:skill_ids/:academic_year/:term", exhibitionController.searchExhibitions);
 
 router.get('/health', async(req, res) => {
     res.send("hello world");

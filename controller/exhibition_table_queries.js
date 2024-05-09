@@ -27,7 +27,7 @@ const getExhibitionsHomePage = async(req, res) => {
 // get a json string of the exhibitions that can be displayed on the home page
 const getExhibitionsHomePageJSON = async() => {
     try {
-        console.log("starting")
+        //console.log("starting")
         columns = ['exhibitions.exhibition_id', 'exhibitions.description', 'exhibitions.video_html_code', 'users.first_name', 'users.last_name', 'classes.academic_year', 'classes.term', 'courses.course_number', 'courses.course_name']
         const exhibitions = await db
             .select(columns.concat([
@@ -46,8 +46,8 @@ const getExhibitionsHomePageJSON = async() => {
             
             .groupBy(columns)
             ;
-            console.log("returning");
-            console.log(JSON.stringify(exhibitions));
+            //console.log("returning");
+            //console.log(JSON.stringify(exhibitions));
         return exhibitions;
     } catch (error) {
         console.log(error)
@@ -55,8 +55,66 @@ const getExhibitionsHomePageJSON = async() => {
     }
 }
 
-// IN PROGRESS: get exhibitions from a search results api call ------------------
-const searchExhibitions = async(req, res) => {
+// SEARCH RESUlTS FOR PAGE
+const getExhibitionsSearchResults = async(search_parameters) => {
+    var user_id = search_parameters.user_id;
+    var course_id = search_parameters.course_id;
+    var admin_id = search_parameters.admin_id; 
+    var skill_id = search_parameters.skill_id; 
+    var academic_year = search_parameters.academic_year;
+    var term = search_parameters.term;
+    var course_level = search_parameters.course_level;
+    console.log(user_id)
+
+    try {
+        const exhibitions = 
+        await db.select("*")
+        .from("exhibitions")
+            .modify(function(queryBuilder) {
+                if(skill_id != []){
+                    queryBuilder.leftJoin("exhibitionSkillPairs", "exhibitions.exhibition_id", "exhibitionSkillPairs.exhibition_id_ref")
+                    .whereIn("exhibitionSkillPairs.skill_id_ref", skill_id)
+                    .distinctOn('exhibition_id')
+                }
+
+                if(user_id != []){
+                    queryBuilder.innerJoin("users", "exhibitions.user_id_ref", "=", "users.user_id")
+                    .whereIn("users.user_id", user_id)
+                }
+
+                if(course_id != []){
+                    queryBuilder.innerJoin("classes", "exhibitions.class_id_ref", "=", "classes.class_id")
+                        .innerJoin("courses", "classes.course_id_ref", "=", "courses.course_id")
+                    .whereIn("courses.course_id", course_id)
+                }
+
+                if(admin_id != []){
+                    queryBuilder.innerJoin("admins", "classes.admin_id_ref", "=", "admins.admin_id")
+                    .whereIn("admins.admin_id", admin_id)
+                }
+
+                if(academic_year != []){
+                    queryBuilder.whereIn("classes.academic_year", academic_year)
+                }
+
+                if(term != []){
+                    queryBuilder.whereIn("classes.term", term)
+                }
+
+                if(course_level != []){
+                    queryBuilder.whereIn("courses.course_level", course_level)
+                }
+           })
+        return exhibitions;
+    } catch (error) {
+        console.log(error)
+        return [];
+    }
+
+}
+
+// OLD: get exhibitions from a search results api call ------------------
+const searchExhibtions = async(req, res) => {
     try {
         const student_id = parseInt(req.params.student_id);
 
@@ -128,5 +186,5 @@ module.exports = {
     getAllExhibitions,
     getExhibitionsHomePage,
     getExhibitionsHomePageJSON,
-    searchExhibitions,
+    getExhibitionsSearchResults,
 };
